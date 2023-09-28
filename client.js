@@ -9,6 +9,9 @@ const client = await createClient({
 
 console.log("Connected with success to redis");
 
-await client.set("key", "value");
-const value = await client.get("key");
+await client.flushAll();
+for (let i = 0; i < 500; i++) {
+  await client.sAdd("titi", "val" + i);
+}
+
 await client.disconnect();
